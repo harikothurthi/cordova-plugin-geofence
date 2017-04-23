@@ -5,7 +5,9 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GeoNotificationStore {
+
     private LocalStorage storage;
 
     public GeoNotificationStore(Context context) {
@@ -19,6 +21,37 @@ public class GeoNotificationStore {
     public GeoNotification getGeoNotification(String id) {
         String objectJson = storage.getItem(id);
         return GeoNotification.fromJson(objectJson);
+    }
+
+    public void setProfile(Profile profile) {
+        storage.setProfile("1", Gson.get().toJson(profile));
+    }
+
+    public Profile getProfile() {
+        String objectJson = storage.getProfile("1");
+        return Profile.fromJson(objectJson);
+    }
+
+    public String getProfileString(){
+        String objectJson = storage.getProfile("1");
+        return objectJson;
+    }
+
+    public void removeProfile() {
+        storage.removeProfile();
+    }
+
+    public void setSISO(SISO siso) {
+        storage.setItem(SISO.ID, Gson.get().toJson(siso));
+    }
+
+    public SISO getSISO(String id) {
+        String objectJson = storage.getItem(id);
+        return SISO.fromJson(objectJson);
+    }
+
+    public List<String> getAllString() {
+        return storage.getAllItems();
     }
 
     public List<GeoNotification> getAll() {

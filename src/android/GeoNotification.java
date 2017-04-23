@@ -4,6 +4,7 @@ import com.google.android.gms.location.Geofence;
 import com.google.gson.annotations.Expose;
 
 public class GeoNotification {
+
     @Expose public String id;
     @Expose public double latitude;
     @Expose public double longitude;

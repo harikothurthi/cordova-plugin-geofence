@@ -50,15 +50,68 @@ public class LocalStorage {
         if (key != null) {
             database = localStorageDBHelper.getReadableDatabase();
             Cursor cursor = database.query(
-                    LocalStorageDBHelper.LOCALSTORAGE_TABLE_NAME, null,
+                    LocalStorageDBHelper.LOCALSTORAGE_TABLE_NAME,
+                    null,
                     LocalStorageDBHelper.LOCALSTORAGE_ID + " = ?",
-                    new String[] { key }, null, null, null);
+                    new String[] { key },
+                    null, null, null);
             if (cursor.moveToFirst()) {
                 value = cursor.getString(1);
             }
             cursor.close();
         }
         return value;
+    }
+
+    /**
+     * Return the profile
+     */
+    public String getProfile(String key){
+        String value = null;
+        if (key != null) {
+            database = localStorageDBHelper.getReadableDatabase();
+            Cursor cursor = database.query(
+                    LocalStorageDBHelper.LOCALSTORAGE_PROFILE_TABLE,
+                    null,
+                    LocalStorageDBHelper.LOCALSTORAGE_ID + " = ?",
+                    new String[] { key },
+                    null, null, null);
+            if (cursor.moveToFirst()) {
+                value = cursor.getString(1);
+            }
+            cursor.close();
+        }
+        return value;
+    }
+
+    /**
+     * Delete profile
+     */
+    public void removeProfile() {
+        database = localStorageDBHelper.getWritableDatabase();
+        database.delete(LocalStorageDBHelper.LOCALSTORAGE_PROFILE_TABLE, null,
+                null);
+    }
+
+    /**
+     * Insert new profile
+     */
+    public void setProfile(String key, String value) {
+        if (key != null && value != null) {
+            String oldValue = getProfile(key);
+            database = localStorageDBHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(LocalStorageDBHelper.LOCALSTORAGE_ID, key);
+            values.put(LocalStorageDBHelper.LOCALSTORAGE_VALUE, value);
+            if (oldValue != null) {
+                database.update(LocalStorageDBHelper.LOCALSTORAGE_PROFILE_TABLE,
+                        values, LocalStorageDBHelper.LOCALSTORAGE_ID + "='"
+                                + key + "'", null);
+            } else {
+                database.insert(LocalStorageDBHelper.LOCALSTORAGE_PROFILE_TABLE,
+                        null, values);
+            }
+        }
     }
 
     /**

@@ -26,6 +26,11 @@ public class LocalStorageDBHelper extends SQLiteOpenHelper {
     public static final String LOCALSTORAGE_TABLE_NAME = "geonotifications";
 
     /**
+     * Profile
+     */
+    public static final String LOCALSTORAGE_PROFILE_TABLE = "profiles";
+
+    /**
      * the id column of the table LOCALSTORAGE_TABLE_NAME
      */
     public static final String LOCALSTORAGE_ID = "_id";
@@ -39,6 +44,9 @@ public class LocalStorageDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "geonotifications.db";
     private static final String DICTIONARY_TABLE_CREATE = "CREATE TABLE "
             + LOCALSTORAGE_TABLE_NAME + " (" + LOCALSTORAGE_ID
+            + " TEXT PRIMARY KEY, " + LOCALSTORAGE_VALUE + " TEXT NOT NULL);";
+    private static final String DICTIONARY_PROFILE_TABLE_CREATE = "CREATE TABLE "
+            + LOCALSTORAGE_PROFILE_TABLE + " (" + LOCALSTORAGE_ID
             + " TEXT PRIMARY KEY, " + LOCALSTORAGE_VALUE + " TEXT NOT NULL);";
 
     /**
@@ -63,6 +71,7 @@ public class LocalStorageDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DICTIONARY_TABLE_CREATE);
+        db.execSQL(DICTIONARY_PROFILE_TABLE_CREATE);
     }
 
     @Override
@@ -71,6 +80,8 @@ public class LocalStorageDBHelper extends SQLiteOpenHelper {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + LOCALSTORAGE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + LOCALSTORAGE_PROFILE_TABLE);
+
         onCreate(db);
     }
 }

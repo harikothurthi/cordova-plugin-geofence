@@ -112,6 +112,15 @@ public class GeoNotificationManager {
         removeGeoNotifications(geoNotificationsIds, callback);
     }
 
+    public void addProfile(Profile profile){
+        geoNotificationStore.setProfile(profile);
+    }
+
+    public void removeProfile(){
+        geoNotificationStore.removeProfile();
+    }
+
+
     /*
      * Create a PendingIntent that triggers an IntentService in your app when a
      * geofence transition occurs.
@@ -121,5 +130,7 @@ public class GeoNotificationManager {
         logger.log(Log.DEBUG, "Geofence Intent created!");
         return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
+
+
 
 }

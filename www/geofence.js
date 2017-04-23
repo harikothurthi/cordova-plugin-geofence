@@ -50,6 +50,30 @@ module.exports = {
         return execPromise(success, error, "GeofencePlugin", "remove", ids);
     },
     /**
+    * Adding profile
+    *
+    * @name  addProfile
+    * @param  {Profile|Array} profile
+    * @param  {Function} success callback
+    * @param  {Function} error callback
+    * @return {Promise}
+    */
+    addProfile: function (profile, success, error) {
+        return execPromise(success, error, "GeofencePlugin", "addProfile", profile);
+    },
+    /**
+    * Remove profile
+    *
+    * @name  removeProfile
+    * @param  {Profile|Array} profile
+    * @param  {Function} success callback
+    * @param  {Function} error callback
+    * @return {Promise}
+    */
+    removeProfile: function (success, error) {
+        return execPromise(success, error, "GeofencePlugin", "removeProfile", []);
+    },
+    /**
      * removing all stored geofences on the device
      *
      * @name  removeAll

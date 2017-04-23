@@ -27,6 +27,17 @@ interface GeofencePlugin {
     errorCallback?: (error: string) => void
   ): Promise<any>;
 
+  addProfile(
+      profile: Profile,
+      successCallback?: (result: any) => void,
+      errorCallback?: (error: string) => void
+  ): Promise<any>;
+
+  removeProfile(
+      successCallback?: (result: any) => void,
+      errorCallback?: (error: string) => void
+  ): Promise<any>;
+
   removeAll(
     successCallback?: (result: any) => void,
     errorCallback?: (error: string) => void
@@ -60,4 +71,16 @@ interface Notification {
   openAppOnClick?: boolean;
   vibration?: number[];
   data?: Object;
+}
+
+interface Profile{
+  id?: string;
+  fname?: string;
+  mname?: string;
+  lname?: string;
+  role?: string;
+  mfname?: string;
+  mlname?: string;
+  contact?: string;
+  preferredLocation?: string;
 }

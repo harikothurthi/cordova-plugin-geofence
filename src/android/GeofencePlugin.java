@@ -85,6 +85,12 @@ public class GeofencePlugin extends CordovaPlugin {
             initialize(callbackContext);
         } else if (action.equals("deviceReady")) {
             deviceReady();
+        }else if(action.equals("addProfile")){
+            Log.d(TAG, "GeofencePlugin: " + " args: " + args.toString());
+            //Profile[] profile = Profile.fromJson(args.getJSONObject(0).toString());
+            //geoNotificationManager.addProfile(profile[0]);
+        }else if(action.equals("removeProfile")){
+            geoNotificationManager.removeProfile();
         } else {
             return false;
         }
