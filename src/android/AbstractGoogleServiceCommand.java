@@ -9,17 +9,23 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import 	android.location.Location;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGoogleServiceCommand implements
-        ConnectionCallbacks, OnConnectionFailedListener{
+        ConnectionCallbacks, OnConnectionFailedListener, LocationListener{
     protected Logger logger;
     protected boolean connectionInProgress = false;
     protected List<IGoogleServiceCommandListener> listeners;
     protected Context context;
     protected GoogleApiClient mGoogleApiClient;
+    protected LocationRequest locationRequest;
+
 
     public AbstractGoogleServiceCommand(Context context) {
         this.context = context;
@@ -51,10 +57,22 @@ public abstract class AbstractGoogleServiceCommand implements
     }
 
     @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+
+    @Override
     public void onConnected(Bundle arg0) {
         // TODO Auto-generated method stub
         logger.log(Log.DEBUG, "Google play services connected");
         // Get the PendingIntent for the request
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setFastestInterval(15000);
+        locationRequest.setInterval(8000);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,locationRequest,this);
+
         ExecuteCustomCode();
     }
 
