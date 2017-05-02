@@ -49,7 +49,7 @@
         <source-file src="src/android/OperationType.java" target-dir="src/com/cowbell/cordova/geofence" />
         <source-file src="src/android/OperationParams.java" target-dir="src/com/cowbell/cordova/geofence" />
 
-        <framework src="com.google.android.gms:play-services-location:9.8.0" />
+        <framework src="com.google.android.gms:play-services-location:+" />
         <lib-file src="src/android/libs/gson-2.3.jar" />
         <lib-file src="src/android/libs/httpclient-4.4.1.1.jar" />
 
@@ -74,7 +74,7 @@
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
             <uses-permission android:name="android.permission.VIBRATE" />
         </config-file>
