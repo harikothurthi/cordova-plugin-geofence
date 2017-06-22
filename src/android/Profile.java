@@ -48,7 +48,7 @@ public class Profile {
     }
 
     public List<NameValuePair> getParameterList(){
-        DateFormat df = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        DateFormat df = new SimpleDateFormat("h:mm a", Locale.getDefault());
         List<NameValuePair> formparams = new ArrayList<NameValuePair>();
         formparams.add(new BasicNameValuePair("fname", fname));
         formparams.add(new BasicNameValuePair("mname", mname));
@@ -56,7 +56,11 @@ public class Profile {
         formparams.add(new BasicNameValuePair("mfname", mfname));
         formparams.add(new BasicNameValuePair("mlname", mlname));
         formparams.add(new BasicNameValuePair("contact", contact));
-        formparams.add(new BasicNameValuePair("location", preferredLocation));
+        String loc = "";
+        if(preferredLocation != null && preferredLocation.indexOf(" SignIn") > 0){
+            loc = preferredLocation.substring(0, preferredLocation.indexOf(" SignIn"));
+        }
+        formparams.add(new BasicNameValuePair("location", loc));
         formparams.add(new BasicNameValuePair("time", df.format(new Date())));
         return formparams;
     }
