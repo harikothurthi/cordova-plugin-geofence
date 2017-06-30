@@ -23,13 +23,13 @@ Check out our example applications:
 
 From master
 ```
-cordova plugin add https://github.com/cowbell/cordova-plugin-geofence
+cordova plugin add https://github.com/MeanTeam/cordova-plugin-geofence.git
 ```
 
 Latest stable version
 
 ```
-cordova plugin add cordova-plugin-geofence
+cordova plugin add https://github.com/MeanTeam/cordova-plugin-geofence.git
 ```
 
 ## Removing the Plugin from project
